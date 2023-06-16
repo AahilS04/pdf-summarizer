@@ -7,44 +7,68 @@ import nltk
 import pytesseract
 import re
 import slate3k as slate
+import pdf2image
+import PyPDF2
+import cv2
+import numpy as np
+import fitz
+#from pytesseract import output
 from pdf2image import convert_from_path
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize, sent_tokenize
 from nltk.stem.snowball import SnowballStemmer
 from PIL import Image
+from PyPDF2 import PdfReader
+from PyPDF2 import PdfWriter
 nltk.download("stopwords")
 nltk.download("punkt")
 
 
-def extractText(file):
-    pdfFileObj = open(pdfFileName, "rb")
-    pdfPages = slate.PDF(pdfFileObj)
+poppler_path = r"C:\Users\aahil\Downloads\Release-23.05.0-0 (1)\poppler-23.05.0\Library\bin"
 
-    # Extract text from PDF file
+def extractText(file):
+    reader = PdfReader(file)  
+# getting a specific page from the pdf file
     text = ""
-    for page in pdfPages:
-        text += page
+    for page in reader.pages:
+        text += page.extract_text()
+  
     return text
 
 
 def extractOCR(file):
-    pages = convert_from_path(file, 500)
-
-    image_counter = 1
-    for page in pages:
-        filename = "page_" + str(image_counter) + ".jpg"
-        page.save(filename, "JPEG")
-        image_counter = image_counter + 1
-
-    limit = image_counter-1
+    pdf_path = file;
     text = ""
-    for i in range(1, limit + 1):
-        filename = "page_" + str(i) + ".jpg"
-        page = str(((pytesseract.image_to_string(Image.open(filename)))))
-        page = page.replace("-\n", "")
-        text += page
-        os.remove(filename)
+    pages = convert_from_path(pdf_path = pdf_path, poppler_path = poppler_path)
+    pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract'
+    saving_folder = r"C:\Users\aahil\OneDrive\Desktop\Projects\Noteshare\note_share-1\pdf-summarizer\output"
+    c = 1
+    for page in pages:
+        img_name = f"img-{c}.jpeg"
+        page.save(os.path.join(saving_folder,img_name),"JPEG")
+        c+=1
+
+        img = cv2.imread(rf"C:\Users\aahil\OneDrive\Desktop\Projects\Noteshare\note_share-1\pdf-summarizer\output\{img_name}")
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        ret, thresh1 = cv2.threshold(gray, 0, 255, cv2.THRESH_OTSU | cv2.THRESH_BINARY_INV)
+        rect_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (18, 18))
+ 
+        dilation = cv2.dilate(thresh1, rect_kernel, iterations = 1)
+ 
+        contours, hierarchy = cv2.findContours(dilation, cv2.RETR_EXTERNAL,
+                                                 cv2.CHAIN_APPROX_NONE)
+        
+        im2 = img.copy()
+
+        for cnt in contours:
+            x, y, w, h = cv2.boundingRect(cnt)
+            rect = cv2.rectangle(im2, (x, y), (x + w, y + h), (0, 255, 0), 2)
+            cropped = im2[y:y + h, x:x + w]    
+            text += pytesseract.image_to_string(cropped)
+
     return text
+
+
 
 
 def summarize(text):
@@ -103,9 +127,10 @@ def summarize(text):
     # Process the text in summary and write it to a new file
     summary = re.sub("’", "'", summary)
     summary = re.sub("[^a-zA-Z0-9'\"():;,.!?— ]+", " ", summary)
-    summaryText = open(fileName + "Summary.txt", "w")
-    summaryText.write(summary)
-    summaryText.close()
+    # summaryText = open(fileName + "summary.txt", "w")
+    # summaryText.write(summary)
+    # summaryText.close()
+    print(summary)
 
 
 # Scan user input for PDF file name
@@ -116,9 +141,10 @@ option = input("Direct text extraction or OCR extraction? (text / OCR)\n")
 
 if option == "text":
     text = extractText(pdfFileName)
-    summarize(text)
+    #summarize(text)
+    print(text)
 elif option == "OCR":
     text = extractOCR(pdfFileName)
-    summarize(text)
+    print(text)
 else:
     print("Not a valid option!")
