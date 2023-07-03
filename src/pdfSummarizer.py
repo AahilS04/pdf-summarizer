@@ -3,6 +3,11 @@
 """pdfSummarizer.py: This script summarizes text provided in a PDF file."""
 
 import os
+from importlib.resources import path
+import io
+from google.cloud import vision
+from google.cloud import vision_v1
+from google.cloud.vision_v1 import types
 import nltk
 import pytesseract
 import re
@@ -20,11 +25,37 @@ from nltk.stem.snowball import SnowballStemmer
 from PIL import Image
 from PyPDF2 import PdfReader
 from PyPDF2 import PdfWriter
+
 nltk.download("stopwords")
 nltk.download("punkt")
 
+os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = r'sanguine-theory-390422-c6fa85864ebb.json'
+
+client = vision.ImageAnnotatorClient()
 
 poppler_path = r"C:\Users\aahil\Downloads\Release-23.05.0-0 (1)\poppler-23.05.0\Library\bin"
+
+
+def print_text(response: vision.AnnotateImageResponse):
+    print("=" * 80)
+    for annotation in response.text_annotations:
+        vertices = [f"({v.x},{v.y})" for v in annotation.bounding_poly.vertices]
+        print(
+            f"{repr(annotation.description):42}",
+            ",".join(vertices),
+            sep=" | ",
+        )
+
+
+
+
+
+
+
+
+
+
+
 
 def extractText(file):
     reader = PdfReader(file)  
@@ -140,9 +171,14 @@ pdfFileName = fileName + ".pdf"
 option = input("Direct text extraction or OCR extraction? (text / OCR)\n")
 
 if option == "text":
-    text = extractText(pdfFileName)
+    #text = extractText(pdfFileName)
     #summarize(text)
-    print(text)
+    image_uri = f'{pdfFileName}'
+    features = [vision.Feature.Type.TEXT_DETECTION]
+
+    response = analyze_image_from_uri(image_uri, features)
+    print_text(response)
+    #print(text)
 elif option == "OCR":
     text = extractOCR(pdfFileName)
     print(text)
