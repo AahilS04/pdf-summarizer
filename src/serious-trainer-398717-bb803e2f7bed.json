@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "serious-trainer-398717",
+  "private_key_id": "bb803e2f7bed248128c1ff119dc37a72cd1356d8",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC8GBLon52vpHCM\nB3V213vBD+lzeXbJbpKOJ74Jdpnow8Zka/eFzaGRSIQJyL822gOk5rt1nT5W3ReH\ngdqrufaoLvwbr5AAHsdmC8W5pnIqTiogu5fFhVwZlmibUvzodxFKjYElK8CGNxtR\ntjmRNDSNn8X/1RepfRUX6OKaGKJciuGrxsBhzI4Qqr9nctY/Q7inWsuzCq71pijR\nxUM0BR5ykqyTaSL/nMMoFbjnFRxPhiGCAtv4l4dMNrZljCYoNqYfPQjmt1iAG3a4\nKLCXCMGda+Sbel6O6cNdIkansKl3pTFx3EoUZK4ENKqVQwiqA+cAEyKCpKoCOrA7\nSxwB1b6XAgMBAAECggEADdf5wExLJ0vDitLbtuD6N0XsCTc14nJ0b+kF6B1mC4cp\nOWfm4l61lwNO0IeJZ0iZfxAKWQg3N95y5mLMzNnViSBYJtN/ljqts1mHdngFLA7v\ns9QKwhtkIW/8B/6OJa/pwmJy0GENfPNeW9+9Ee5VNd0+DevJn4xYupdF4lCQ1p2z\n1UErdMJ/arwq3Q+6ktG321hREuNAOk/JuQkTOVoXnFOAgsiOH/pjC28e/s97L9UT\nK4/Z5hyrR0lLXulYEKH+RBcNxcvDmff41u+FUmen6ZFXCp5eo8McmmCcv2HuAPlY\n/Q9jDmvYLq2EZk4MsdMZMrlFadY7ha6lRLgDy/YQSQKBgQDkoDQYhZAsN6LAlevT\nfSk04Ep2WQzxVaZCyHkgNmeftj1XA9Qk3+JaGgUvxjeT+cJsfvGZr56pR2+yj69A\nPo6bW3mPPhCopgiumi2m+DoT9AF85351NpthibgWfB71VOn1WLwM8Y+iMF79SXAF\nds/WNEZo+1+FfE6RB0AEQ49BSQKBgQDSnX+QicnksCkAemcAE1Erzg9verhk4f7j\nayYs5Iw4vG76NMvZV50qaUM5fse4MM+6ZEU4TybO5SRIhzJSNd3qwchrGRyl8Ph+\ndLyVO+6+lJImvkj148voeU+lEJkxa7cfoQ3DV7LcguMS6jLB0fUKJRIqAw5no5uq\nQ1cKQ4zg3wKBgQC4fUKsyxL1a4vtJs3fou9emOPdrqyQDtKUr5t20BA8xF2pWxCV\nFQleNgMbczOkOHaZALNLlnlNFrVe/S2phRGk8mMcoTPmM91rsETIqSSMt2l/9nqI\ncaFfSzf/BPgidvw4nPta4o9KjQgKEnnQHvlGXHa4/qgtWos34wbYqf/u6QKBgEzI\n2NoEMhPq2XfwKB8R69TxkhUNg65b6kZVKRzS0gBZSohzuSHq3ES7DaQngX64ZPNK\nXSYTTU2+ooTCrWjldJuCvKO3CwfAm4fW3W325KqcldAELatfulZt68h9DazD3YZt\nfAwMrAvSuCCMO6cH+bMSItYoORc1wanIVTJLwE+3AoGBANlpxH13DDJnFv7e4KI5\nQLRKuiKFEJ4LggYak2KSaYKTptm6SkH66pDzZzXZw+7F0adQjGVQHSC1uJYNRCv0\nCxtDuFkJUNPLsYChhqvFwZj/bAa7WCRQTipMYVj/SfSTnNXhiaIgWF8NFPutUjp3\n8FoTw/geizupvl+Q+x7C2XVn\n-----END PRIVATE KEY-----\n",
+  "client_email": "noteshare@serious-trainer-398717.iam.gserviceaccount.com",
+  "client_id": "107581251726727130874",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/noteshare%40serious-trainer-398717.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
